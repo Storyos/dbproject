@@ -14,19 +14,20 @@ async function loginmenu() {
         console.log(`1. 로그인  2.회원가입 3.관리자접속`);
         let login_menu = await Input.getUserInput();
         if (login_menu === '1') {
-            console.log('ID 입력 : ');
-            let login_id = await Input.getUserInput();
-        // 여기서 sql 문 작성
-            let sql = `select password from user where uid=login_id`;
-            connection.query(sql, [true], (error, result, fields) => {
-                if (error) return console.error(error.message);
-                // 로그인 성공처리
-                if (result === 'login_id') {
-                    return 0;
-                } else {
-                    console.log('로그인 실패 ');
-                }
-            });
+            return 1;
+        //     console.log('ID 입력 : ');
+        //     let login_id = await Input.getUserInput();
+        // // 여기서 sql 문 작성
+        //     let sql = `select password from user where uid=login_id`;
+        //     connection.query(sql, [true], (error, result, fields) => {
+        //         if (error) return console.error(error.message);
+        //         // 로그인 성공처리
+        //         if (result === 'login_id') {
+        //             return 1;
+        //         } else {
+        //             console.log('로그인 실패 ');
+        //         }
+        //     });
         }
         else if(login_menu === '3'){
             return 3; //관리자로 들어감
@@ -42,10 +43,10 @@ async function main() {
     if(login_success===1){
         console.log("SUCCESSED");
     while (true) {
-        console.log(`1. 데이터입력 2.데이터수정 3.데이터삭제 4.목록  5.종료`);
+        console.log(`1. 대출 신청 2.도서 반납 3.도서 조회 4.종료`);
         let menu = await Input.getUserInput();
         if (menu === '1') {
-            console.log('제목입력>');
+            console.log('대출 신청칸');
             // 설정 필요
             let title = await Input.getUserInput();
             console.log('');
@@ -53,13 +54,11 @@ async function main() {
             // let sql = `INSERT INTO dbteamproject(title,completed) VALUES(?,false)`;
             // connection.query(sql, [title]);
         } else if (menu === '2') {
-            console.log('수정');
+            console.log('도서반납 칸');
         } else if (menu === '3') {
-            console.log('삭제');
-        } else if (menu === '4') {
-            console.log('목록');
-        } else if (menu === '5') {
-            console.log('프로그램 종료~');
+            console.log('도서조회 칸');
+        }else if (menu === '4') {
+            console.log('프로그램을 종료합니다');
             connection.end();
             process.exit();
         } else {
