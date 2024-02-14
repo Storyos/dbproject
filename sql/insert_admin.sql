@@ -1,0 +1,2 @@
+INSERT INTO Admin (UID, UNAME, UPWD)
+VALUES ('000000', 'Karl Jablonski', '1111');
