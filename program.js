@@ -12,17 +12,37 @@ let connection = mysql.createConnection({
 async function main() {
     console.clear();
     connection.connect();
+    // while (true) {
+    //     console.log(`1. 로그인  2.회원가입`);
+    //     let login_menu = await Input.getUserInput();
+    //     if (login_menu === '1') {
+    //         console.log('ID 입력 : ');
+    //         let login_id = await Input.getUserInput();
+    //     여기서 sql 문 작성
+    //         let sql = `select password from user where uid=login_id`;
+    //         connection.query(sql, [true], (error, result, fields) => {
+    //             if (error) return console.error(error.message);
+    //             if (result === 'login_id') {
+    //                 break;
+    //     로그인 성공처리
+    //             } else {
+    //                 console.log('로그인 실패 ');
+    //             }
+    //         });
+    //     }
+    // }
     while (true) {
         console.log(`1. 데이터입력 2.데이터수정 3.데이터삭제 4.목록  5.종료`);
         let menu = await Input.getUserInput();
+        console.log("여기까지 됨");
         if (menu === '1') {
             console.log('제목입력>');
             // 설정 필요
             let title = await Input.getUserInput();
             console.log('');
             // query문 설정 필요
-            let sql = `INSERT INTO dbteamproject(title,completed) VALUES(?,false)`;
-            connection.query(sql, [title]);
+            // let sql = `INSERT INTO dbteamproject(title,completed) VALUES(?,false)`;
+            // connection.query(sql, [title]);
         } else if (menu === '2') {
             console.log('수정');
         } else if (menu === '3') {
