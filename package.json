@@ -1,0 +1,16 @@
+{
+  "name": "dbproject",
+  "version": "1.0.0",
+  "description": "주제 : 도서관리시스템",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": " node --env-file .env connect.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mysql": "^2.18.1"
+  }
+}
