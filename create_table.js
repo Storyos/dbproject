@@ -12,11 +12,8 @@ let connection = mysql.createConnection({
 connection.connect((err) => {
     if (err) return console.error(err.message);
 
-    const createTodosTable = `create table if not exists todos(
-                          id int primary key auto_increment,
-                          title varchar(255) not null,
-                          completed bool not null default false
-                      )`;
+    //여기에 sql문 다 복붙하시면 됩니다
+    const createTodosTable = ``;
 
     connection.query(createTodosTable, (err, results, fields) => {
         if (err) return console.log(err.message);
