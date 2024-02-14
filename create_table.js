@@ -13,7 +13,9 @@ connection.connect((err) => {
     if (err) return console.error(err.message);
 
     //여기에 sql문 다 복붙하시면 됩니다
-    const createTodosTable = ``;
+    const createTodosTable = `
+        
+    `;
 
     connection.query(createTodosTable, (err, results, fields) => {
         if (err) return console.log(err.message);
