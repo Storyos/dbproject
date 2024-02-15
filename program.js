@@ -78,7 +78,7 @@ async function main() {
             console.log('메뉴를 잘못 선택하셨습니다.');
         };
         await wait(1000);
-        // console.clear();
+        console.clear();
     };
 } else if(login_success === 3){
     console.clear();
