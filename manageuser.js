@@ -6,7 +6,7 @@ async function manageuser(connection,query){
     let sql = `select checkout from user where unum = ?`;
     let result = await query(sql, [change_unum]);
 
-    if(result[0].checkout=1){
+    if(result[0].checkout===1){
         console.log(`${change_unum}은 현재 대출가능 상태입니다.`);
         console.log('-------------------------------------------');
         console.log('대출을 제한하시려면 y를 눌러주세요');
