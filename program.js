@@ -10,38 +10,39 @@ let connection = mysql.createConnection({
 });
 
 async function loginmenu() {
+    console.log(`1. 로그인  2.회원가입 3.관리자접속`);
     while (true) {
-        console.log(`1. 로그인  2.회원가입 3.관리자접속`);
         let login_menu = await Input.getUserInput();
+        let login_fail_count = 0;
         if (login_menu === '1') {
-            // return 1;
-            console.log('학번 입력 : ');
+            while (true){
+            setTimeout(()=>{console.log('학번 입력 : ')},1000);
             let login_id = await Input.getUserInput();
-        // 여기서 sql 문 작성
-            let sql = `select unum from user where unum=${login_id}`;
-            connection.query(sql, [true], async (error, result, fields) => {
+            console.log('비밀번호 입력 : ');
+            let login_pwd = await Input.getUserInput();
+            let sql = `select unum from user where unum=${login_id} and upwd = "${login_pwd}"`;
+            let login_success = 0; 
+            // 0 일 때 성공 X;
+            connection.query(sql, [true], (error, result, fields) => {
                 if (error) return console.error(error.message);
                 // 로그인 성공처리
-                if (result[0].unum === login_id) {
-                    console.log("비밀번호 입력 : ");
-                    let login_pwd = await Input.getUserInput();
-                    let sql = `select upwd from user where unum = ${login_id}`;
-                    //비밀번호가 맞을 경우
-                    connection.query(sql, [true], async (pwd_err,login_result,fields)=>{
-                        if(pwd_err) return console.error(pwd_err.message);
-                        console.log(login_result[0].upwd);
-                        console.log(login_pwd);
-                        if(login_result[0].upwd===login_pwd){
-                            console.log(`Login Success`);
-                            return 1;
+                if (result[0]) {
+                    console.log("로그인 성공");
+                    login_success = 1;
+                }else{
+                            console.log(`${++login_fail_count}번 실패하였습니다. 3번실패시 종료 됩니다.`);
                         };
-                    });
-                } else {
-                    console.log(result[0].unum);
-                    console.log('로그인 실패 ');
-                }
-            });
+                });
+            //로그인 성공
+            if(login_success===1){
+                return 1;
+            }
+            if(login_fail_count){
+                connection.end();
+                process.exit();
+            }
         }
+    }
         else if(login_menu === '3'){
             return 3; //관리자로 들어감
         }
@@ -53,7 +54,8 @@ async function main() {
     console.clear();
     // loginmenu()에서 return값을 받음 --> 성공일 때, 넘기기
     let login_success = await loginmenu();
-    if(login_success===1){
+    console.log(login_success);
+    if(login_success=1){
         console.log("SUCCESSED");
     while (true) {
         console.log(`1. 대출 신청 2.도서 반납 3.도서 조회 4.종료`);
