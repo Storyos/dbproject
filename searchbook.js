@@ -17,7 +17,6 @@ console.log("찾으시는 도서를 입력해 주세요 : ");
         console.log(`일치하는 도서를 찾을 수 없습니다.`);
     }
   });
-
           // connection.query(sql, [true], (pwd_err,book_result,fields)=>{
           //     if(pwd_err) return console.error(pwd_err.message);            
           //     if(book_result[0].book_title === book_title || book_result[0].book_author === book_title)

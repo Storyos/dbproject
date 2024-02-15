@@ -26,7 +26,7 @@ const rl = readline.createInterface({
 });
 
 // 사용자 정보를 입력받아 데이터베이스에 삽입하는 함수
-function registerUser() {
+function registerUser(connection) {
         rl.question('학번을 입력해주세요: ',(usernumber) => { 
         rl.question('이름을 입력해주세요: ', (username) => {
         rl.question('전화번호를 입력해주세요: ', (phonenumber) => {
@@ -50,4 +50,4 @@ function registerUser() {
     });
 }
 
-registerUser();
+module.exports={registerUser};

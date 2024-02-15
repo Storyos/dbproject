@@ -1,5 +1,7 @@
-CREATE TABLE Admin (
-UID int,
-UNAME varchar(20) not null,
-UPWD varchar(20) not null
+CREATE TABLE `Admin` (
+	`UID`	INT	NOT NULL	COMMENT '관리자ID',
+	`book_num2`	int(6)	NOT NULL	COMMENT '도서아이디',
+	`UID2`	INT	NOT NULL	COMMENT '사용자식별ID',
+	`UNAME`	VARCHAR(20)	NOT NULL	COMMENT '관리자이름',
+	`UPWD`	VARCHAR(20)	NOT NULL	COMMENT '관리자 비밀번호'
 );

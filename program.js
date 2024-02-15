@@ -1,4 +1,5 @@
 const search = require('./searchbook');
+const joining = require('./join.js');
 const Input = require('./userInput');
 let mysql = require('mysql');
 
@@ -50,6 +51,9 @@ async function loginmenu() {
                 }
             }
             return 1;
+        }
+        else if (login_menu === '2'){
+            await joining.registerUser(connection);
         }
         else if (login_menu === '3') {
             return 3; //관리자로 들어감
