@@ -30,6 +30,7 @@ async function loginmenu() {
         let login_fail_count = 0;
         let login_success = 0;
         if (login_menu === '1') {
+          return 1;
             while (true) {
                 console.log('학번 입력 : ');
                 let login_id = await Input.getUserInput();
