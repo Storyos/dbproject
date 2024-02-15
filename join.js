@@ -20,11 +20,11 @@ connection.connect((err) => {
 async function registerUser(connection) {
     console.log('학번을 입력해주세요: ');
     let usernumber = await Input.getUserInput();
-    console.log('이름');
+    console.log('이름을 입력해주세요');
     let username = await Input.getUserInput();
-    console.log('번호');
+    console.log('번호를 입력해주세요');
     let phonenumber = await Input.getUserInput();
-    console.log('비밀번호');
+    console.log('비밀번호를 입력해주세요');
     let password = await Input.getUserInput();
                     // MySQL에 사용자 정보 삽입
                     const sql = 'INSERT INTO user (unum, uname, upno, upwd) VALUES (?, ?, ?, ?)';
