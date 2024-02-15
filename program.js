@@ -1,3 +1,4 @@
+const search = require('./searchbook');
 const Input = require('./userInput');
 let mysql = require('mysql');
 
@@ -14,7 +15,8 @@ async function loginmenu() {
         console.log(`1. 로그인  2.회원가입 3.관리자접속`);
         let login_menu = await Input.getUserInput();
         if (login_menu === '1') {
-            // return 1;
+          // 테스트 시 동작됨
+          // return 1 
             console.log('학번 입력 : ');
             let login_id = await Input.getUserInput();
         // 여기서 sql 문 작성
@@ -66,8 +68,9 @@ async function main() {
         } else if (menu === '2') {
             console.log('도서반납 칸');
         } else if (menu === '3') {
-            console.log('도서조회 칸');
+          await search.searchbook(connection);
         }else if (menu === '4') {
+        
             console.log('프로그램을 종료합니다');
             connection.end();
             process.exit();
@@ -75,7 +78,7 @@ async function main() {
             console.log('메뉴를 잘못 선택하셨습니다.');
         };
         await wait(1000);
-        console.clear();
+        // console.clear();
     };
 } else if(login_success === 3){
     console.clear();
