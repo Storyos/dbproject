@@ -20,15 +20,14 @@ connection.connect((err) => {
 
 
 
+
 // 사용자 정보를 입력받아 데이터베이스에 삽입하는 함수
 function registerUser(connection) {
-        
-// 사용자 입력을 받기 위한 인터페이스 생성
+  // 사용자 입력을 받기 위한 인터페이스 생성
 const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
+  input: process.stdin,
+  output: process.stdout
 });
-
         rl.question('학번을 입력해주세요: ',(usernumber) => { 
         rl.question('이름을 입력해주세요: ', (username) => {
         rl.question('전화번호를 입력해주세요: ', (phonenumber) => {
