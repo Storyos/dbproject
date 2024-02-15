@@ -8,6 +8,7 @@ let connection = mysql.createConnection({
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
 });
+
 function query(sql, args) {
     return new Promise((resolve, reject) => {
         connection.query(sql, args, (error, results, fields) => {
