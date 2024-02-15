@@ -1,6 +1,7 @@
 const search = require('./searchbook');
 const joining = require('./join.js');
 const Input = require('./userInput');
+const manageusers = require('./manageuser.js');
 let mysql = require('mysql');
 
 let connection = mysql.createConnection({
@@ -67,7 +68,7 @@ async function main() {
     // loginmenu()에서 return값을 받음 --> 성공일 때, 넘기기
     let login_success = await loginmenu();
     console.log(login_success);
-    if (login_success = 1) {
+    if (login_success ===1) {
         console.log("SUCCESSED");
         while (true) {
             console.log(`1. 대출 신청 2.도서 반납 3.도서 조회 4.종료`);
@@ -82,7 +83,6 @@ async function main() {
             } else if (menu === '3') {
                 await search.searchbook(connection);
             } else if (menu === '4') {
-
                 console.log('프로그램을 종료합니다');
                 connection.end();
                 process.exit();
@@ -96,10 +96,10 @@ async function main() {
         console.clear();
         console.log('----------관리자 메뉴-------------');
         while (true) {
-            console.log(`1. 사용자 대출 허가/거부 변경 2.도서 관리 3. 종료`);
+            console.log(`1. 사용자 조회  2.도서 관리 3. 대출 허가/거부 변경 4. 종료`);
             let admin_menu = await Input.getUserInput();
             if (admin_menu === '1') {
-                console.log('사용자 대출 허가/거부 변경')
+                console.log('사용자 조회')
             } else if (admin_menu === '2') {
                 console.log('도서 관리');
                 while (true) {
@@ -109,19 +109,29 @@ async function main() {
                         console.log('도서가 추가되었습니다.');
                     } else if (book_menu === '2') {
                         console.log('도서를 삭제하였습니다.');
-                    } else if (book_menu === '3') {
-                        console.log('프로그램 종료~');
+                    } else if(book_menu==='3'){
+                        console.log('프로그램 종료');
                         connection.end();
                         process.exit();
-                    } else {
+                    } 
+                    else {
                         console.log('메뉴를 잘못 선택하셨습니다.');
                     }
                     await wait(1000);
                     console.clear();
                 }
-            };
+            }else if (admin_menu==='3'){
+                console.log('대출 허가/거부 변경');
+                await manageusers.manageuser(connection,query);
+            }else if (admin_menu==='4'){
+                console.log('프로그램을 종료합니다.');
+                connection.end();
+                process.exit();
+            }
         }
     };
 }
     main();
     const wait = (timeToDelay) => new Promise((resolve) => setTimeout(resolve, timeToDelay));
+
+

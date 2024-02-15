@@ -6,5 +6,5 @@ CREATE TABLE Checkout (
 	`book_delay`   BOOLEAN	NOT NULL COMMENT '연체여부',
 	foreign key (book_uid) references Book(UID),
     foreign key (user_uid) references USER(UID),
-    primary key(book_uid,user_uid)book_uid
+    primary key(book_uid,user_uid)
 );
