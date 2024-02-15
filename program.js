@@ -112,15 +112,9 @@ async function main() {
                     } else {
                         console.log('메뉴를 잘못 선택하셨습니다.');
                     }
-                } else if (admin_menu === '3') {
-                    console.log('프로그램 종료~');
-                    connection.end();
-                    process.exit();
-                } else {
-                    console.log('메뉴를 잘못 선택하셨습니다.');
-                };
-                await wait(1000);
-                console.clear();
+                    await wait(1000);
+                    console.clear();
+                }
             };
         }
     };
