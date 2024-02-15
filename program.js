@@ -101,25 +101,22 @@ async function main() {
             let admin_menu = await Input.getUserInput();
             if (admin_menu === '1') {
                 console.log('사용자 조회')
-                function userInfo(connection) {
+                async function userInfo(connection) {
                     console.log("사용자 정보를 조회하시겠습니까?");
                     
                   
                     let info = `SELECT UID, UNUM, UNAME, UPNO, CHECKOUT, UPWD FROM USER`;
                   
-                    connection.query(info, (error, results, fields) => {
+                    connection.query(info, [info],(error, results, fields) => {
                       if (error) return console.error(error.message);
-                      console.log(results[0].uid);
-                  
-                      if (results[0].UID = true) {
-                        for(let i = 0; i < result.length; i++) {
-                            console.log(`${i+1} | ${result[i].UID}   |   ${result[i].UNUM}   |   ${result[i].UNAME}   |   ${result[i].UPNO});
-                          }
-                        // console.log('${results}를 조회했습니다.');
-                        // console.log(results);
-                      }
+                        for(let i = 0; i < results.length; i++) {
+                            console.log(`${i+1} | ${results[i].UID}   |   ${results[i].UID}   |   ${results[i].UNUM}   |   ${results[i].UNAME}  |   ${results[i].UPNO}   |   ${results[i].CHECKOUT}   |   ${results[i].UPWD}`);
+                        }
                     });
-                    userInfo(connection);
+                }
+
+                await userInfo(connection);
+                
             } else if (admin_menu === '2') {
                 console.log('도서 관리');
                 while (true) {
@@ -153,5 +150,5 @@ async function main() {
 }
     main();
     const wait = (timeToDelay) => new Promise((resolve) => setTimeout(resolve, timeToDelay));
-                        
+
 
