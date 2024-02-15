@@ -14,20 +14,33 @@ async function loginmenu() {
         console.log(`1. 로그인  2.회원가입 3.관리자접속`);
         let login_menu = await Input.getUserInput();
         if (login_menu === '1') {
-            return 1;
-        //     console.log('ID 입력 : ');
-        //     let login_id = await Input.getUserInput();
-        // // 여기서 sql 문 작성
-        //     let sql = `select password from user where uid=login_id`;
-        //     connection.query(sql, [true], (error, result, fields) => {
-        //         if (error) return console.error(error.message);
-        //         // 로그인 성공처리
-        //         if (result === 'login_id') {
-        //             return 1;
-        //         } else {
-        //             console.log('로그인 실패 ');
-        //         }
-        //     });
+            // return 1;
+            console.log('학번 입력 : ');
+            let login_id = await Input.getUserInput();
+        // 여기서 sql 문 작성
+            let sql = `select unum from user where unum=${login_id}`;
+            connection.query(sql, [true], async (error, result, fields) => {
+                if (error) return console.error(error.message);
+                // 로그인 성공처리
+                if (result[0].unum === login_id) {
+                    console.log("비밀번호 입력 : ");
+                    let login_pwd = await Input.getUserInput();
+                    let sql = `select upwd from user where unum = ${login_id}`;
+                    //비밀번호가 맞을 경우
+                    connection.query(sql, [true], async (pwd_err,login_result,fields)=>{
+                        if(pwd_err) return console.error(pwd_err.message);
+                        console.log(login_result[0].upwd);
+                        console.log(login_pwd);
+                        if(login_result[0].upwd===login_pwd){
+                            console.log(`Login Success`);
+                            return 1;
+                        };
+                    });
+                } else {
+                    console.log(result[0].unum);
+                    console.log('로그인 실패 ');
+                }
+            });
         }
         else if(login_menu === '3'){
             return 3; //관리자로 들어감
@@ -50,9 +63,6 @@ async function main() {
             // 설정 필요
             let title = await Input.getUserInput();
             console.log('');
-            // query문 설정 필요
-            // let sql = `INSERT INTO dbteamproject(title,completed) VALUES(?,false)`;
-            // connection.query(sql, [title]);
         } else if (menu === '2') {
             console.log('도서반납 칸');
         } else if (menu === '3') {
