@@ -1,7 +1,7 @@
 const Input = require('./userInput');
 let mysql = require('mysql');
 async function searchbook(connection) {
-console.log("찾으시는 도서를 입력해 주세요 : ");
+console.log("찾으시는 도서나 저자 이름을 입력해 주세요 : ");
   // book_title을 입력받음
   let book_title = await Input.getUserInput();
   // 입력된 값이 해당 sql문에 있는지 확인
