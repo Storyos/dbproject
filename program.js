@@ -2,6 +2,7 @@ const search = require('./searchbook');
 const joining = require('./join.js');
 const Input = require('./userInput');
 const manageusers = require('./manageuser.js');
+const delete_books = require('./delete_book.js');
 let mysql = require('mysql');
 
 let connection = mysql.createConnection({
@@ -31,7 +32,7 @@ async function loginmenu() {
         let login_fail_count = 0;
         let login_success = 0;
         if (login_menu === '1') {
-          return 1;
+            return 1;
             while (true) {
                 console.log('학번 입력 : ');
                 let login_id = await Input.getUserInput();
@@ -39,7 +40,7 @@ async function loginmenu() {
                 let login_pwd = await Input.getUserInput();
                 let sql = `select unum from user where unum= ? and upwd = ?`;
                 // 0 일 때 성공 X;
-                let result = await query(sql, [login_id,login_pwd]);
+                let result = await query(sql, [login_id, login_pwd]);
                 if (result[0]) {
                     console.log("로그인 성공");
                     login_success = 1;
@@ -54,7 +55,7 @@ async function loginmenu() {
             }
             return 1;
         }
-        else if (login_menu === '2'){
+        else if (login_menu === '2') {
             await joining.registerUser(connection);
         }
         else if (login_menu === '3') {
@@ -69,7 +70,7 @@ async function main() {
     // loginmenu()에서 return값을 받음 --> 성공일 때, 넘기기
     let login_success = await loginmenu();
     console.log(login_success);
-    if (login_success ===1) {
+    if (login_success === 1) {
         console.log("SUCCESSED");
         while (true) {
             console.log(`1. 대출 신청 2.도서 반납 3.도서 조회 4.종료`);
@@ -109,22 +110,23 @@ async function main() {
                     if (book_menu === '1') {
                         console.log('도서가 추가되었습니다.');
                     } else if (book_menu === '2') {
+                        await delete_books.delete_book(connection,query);
                         console.log('도서를 삭제하였습니다.');
-                    } else if(book_menu==='3'){
+                    } else if (book_menu === '3') {
                         console.log('프로그램 종료');
                         connection.end();
                         process.exit();
-                    } 
+                    }
                     else {
                         console.log('메뉴를 잘못 선택하셨습니다.');
                     }
                     await wait(1000);
                     console.clear();
                 }
-            }else if (admin_menu==='3'){
+            } else if (admin_menu === '3') {
                 console.log('대출 허가/거부 변경');
-                await manageusers.manageuser(connection,query);
-            }else if (admin_menu==='4'){
+                await manageusers.manageuser(connection, query);
+            } else if (admin_menu === '4') {
                 console.log('프로그램을 종료합니다.');
                 connection.end();
                 process.exit();
@@ -132,7 +134,6 @@ async function main() {
         }
     };
 }
-    main();
-    const wait = (timeToDelay) => new Promise((resolve) => setTimeout(resolve, timeToDelay));
-
+main();
+const wait = (timeToDelay) => new Promise((resolve) => setTimeout(resolve, timeToDelay));
 
