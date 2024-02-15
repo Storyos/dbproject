@@ -36,20 +36,7 @@ async function registerUser(connection) {
                         }
                         // MySQL 연결 종료
                         connection.end();
-<<<<<<< HEAD
-                        rl.close();
-                    });
-                });
-
-            });
-        });
-    });
-}
-
-module.exports = { registerUser };
-=======
                     });
 }
 
 module.exports = { registerUser };
->>>>>>> sge
