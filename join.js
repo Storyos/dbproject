@@ -1,7 +1,6 @@
-let mysql = require('mysql');
-let readline = require('readline');
-
-let connection = mysql.createConnection({
+const mysql = require('mysql');
+const Input = require('./userInput');
+const connection = mysql.createConnection({
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     user: process.env.DB_USER,
@@ -18,23 +17,18 @@ connection.connect((err) => {
     console.log('Connected to MySQL');
 });
 
-
-
-
-// 사용자 정보를 입력받아 데이터베이스에 삽입하는 함수
-function registerUser(connection) {
-    // 사용자 입력을 받기 위한 인터페이스 생성
-    const rl = readline.createInterface({
-        input: process.stdin,
-        output: process.stdout
-    });
-    rl.question('학번을 입력해주세요: ', (usernumber) => {
-        rl.question('이름을 입력해주세요: ', (username) => {
-            rl.question('전화번호를 입력해주세요: ', (phonenumber) => {
-                rl.question('비밀번호를 입력해주세요: ', (password) => {
+async function registerUser(connection) {
+    console.log('학번을 입력해주세요: ');
+    let usernumber = await Input.getUserInput();
+    console.log('이름');
+    let username = await Input.getUserInput();
+    console.log('번호');
+    let phonenumber = await Input.getUserInput();
+    console.log('비밀번호');
+    let password = await Input.getUserInput();
                     // MySQL에 사용자 정보 삽입
-                    const sql = 'INSERT INTO user (unum, uname, upno, upwd) VALUES (?,?,?,?)';
-                    connection.query(sql, [username, username, phonenumber, password], (err, result) => {
+                    const sql = 'INSERT INTO user (unum, uname, upno, upwd) VALUES (?, ?, ?, ?)';
+                    connection.query(sql, [usernumber, username, phonenumber, password], (err, result) => {
                         if (err) {
                             console.error('Error registering user: ', err);
                         } else {
@@ -42,6 +36,7 @@ function registerUser(connection) {
                         }
                         // MySQL 연결 종료
                         connection.end();
+<<<<<<< HEAD
                         rl.close();
                     });
                 });
@@ -52,3 +47,9 @@ function registerUser(connection) {
 }
 
 module.exports = { registerUser };
+=======
+                    });
+}
+
+module.exports = { registerUser };
+>>>>>>> sge
