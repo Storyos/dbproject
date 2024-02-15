@@ -2,6 +2,7 @@ const search = require('./searchbook');
 const joining = require('./join.js');
 const Input = require('./userInput');
 const manageusers = require('./manageuser.js');
+const userInfo = require('./userInfo.js');
 let mysql = require('mysql');
 
 let connection = mysql.createConnection({
@@ -100,23 +101,8 @@ async function main() {
             console.log(`1. 사용자 조회  2.도서 관리 3. 대출 허가/거부 변경 4. 종료`);
             let admin_menu = await Input.getUserInput();
             if (admin_menu === '1') {
-                console.log('사용자 조회')
-                async function userInfo(connection) {
-                    console.log("사용자 정보를 조회하시겠습니까?");
-                    
-                  
-                    let info = `SELECT UID, UNUM, UNAME, UPNO, CHECKOUT, UPWD FROM USER`;
-                  
-                    connection.query(info, [info],(error, results, fields) => {
-                      if (error) return console.error(error.message);
-                        for(let i = 0; i < results.length; i++) {
-                            console.log(`${i+1} | ${results[i].UID}   |   ${results[i].UID}   |   ${results[i].UNUM}   |   ${results[i].UNAME}  |   ${results[i].UPNO}   |   ${results[i].CHECKOUT}   |   ${results[i].UPWD}`);
-                        }
-                    });
-                }
-
-                await userInfo(connection);
-                
+                console.log('사용자 조회')                
+                await userInfo.userInfo(connection);
             } else if (admin_menu === '2') {
                 console.log('도서 관리');
                 while (true) {
