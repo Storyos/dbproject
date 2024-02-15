@@ -34,9 +34,9 @@ async function loginmenu() {
                 let login_id = await Input.getUserInput();
                 console.log('비밀번호 입력 : ');
                 let login_pwd = await Input.getUserInput();
-                let sql = `select unum from user where unum=${login_id} and upwd = "${login_pwd}"`;
+                let sql = `select unum from user where unum= ? and upwd = ?`;
                 // 0 일 때 성공 X;
-                let result = await query(sql, [true]);
+                let result = await query(sql, [login_id,login_pwd]);
                 if (result[0]) {
                     console.log("로그인 성공");
                     login_success = 1;
@@ -118,6 +118,6 @@ async function main() {
             };
         }
     };
-
+}
     main();
     const wait = (timeToDelay) => new Promise((resolve) => setTimeout(resolve, timeToDelay));
