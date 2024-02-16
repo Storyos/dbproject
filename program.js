@@ -3,6 +3,7 @@ const joining = require('./join.js');
 const Input = require('./userInput');
 const manageusers = require('./manageuser.js');
 const delete_books = require('./delete_book.js');
+const userInfo = require('./userInfo.js');
 let mysql = require('mysql');
 
 let connection = mysql.createConnection({
@@ -105,7 +106,8 @@ async function main() {
             console.log(`1. 사용자 조회  2.도서 관리 3. 대출 허가/거부 변경 4. 종료`);
             let admin_menu = await Input.getUserInput();
             if (admin_menu === '1') {
-                console.log('사용자 조회')
+                console.log('사용자 조회')                
+                await userInfo.userInfo(connection);
             } else if (admin_menu === '2') {
                 console.log('도서 관리');
                 while (true) {
