@@ -5,6 +5,7 @@ const manageusers = require('./manageuser.js');
 const delete_books = require('./delete_book.js');
 const userInfo = require('./userInfo.js');
 const add_books = require('./add_book.js');
+const add_checkouts = require('./add_checkout.js');
 let mysql = require('mysql');
 
 let connection = mysql.createConnection({
@@ -83,9 +84,7 @@ async function main() {
             let menu = await Input.getUserInput();
             if (menu === '1') {
                 console.log('대출 신청칸');
-                // 설정 필요
-                let title = await Input.getUserInput();
-                console.log('');
+                await add_checkouts.add_checkout(connection,query);
             } else if (menu === '2') {
                 console.log('도서반납 칸');
             } else if (menu === '3') {
