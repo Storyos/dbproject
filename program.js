@@ -88,7 +88,7 @@ async function main() {
         console.log('대출 신청칸');
         await add_checkouts.add_checkout(connection, query);
       } else if (menu === '2') {
-
+        // 도서 조회 및 도서 반납
         await return_checkouts.return_checkout(connection, login_success, query);
 
       } else if (menu === '3') {
