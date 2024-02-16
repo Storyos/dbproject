@@ -6,6 +6,7 @@ const delete_books = require('./delete_book.js');
 const userInfo = require('./userInfo.js');
 const add_books = require('./add_book.js');
 const add_checkouts = require('./add_checkout.js');
+const search_mycheckouts = require('./search_mycheckout.js');
 let mysql = require('mysql');
 
 let connection = mysql.createConnection({
@@ -80,7 +81,7 @@ async function main() {
         while (true) {
             console.clear();
             console.log(`----------- ${login_success}님 환영합니다. ----------`);
-            console.log(`||1. 대출 신청 2.도서 반납 3.도서 조회 4.종료||`);
+            console.log(`||1. 대출 신청 2.도서 반납 3.도서 조회 4.내 대출 현황 조회 5.종료||`);
             let menu = await Input.getUserInput();
             if (menu === '1') {
                 console.log('대출 신청칸');
@@ -89,7 +90,9 @@ async function main() {
                 console.log('도서반납 칸');
             } else if (menu === '3') {
                 await search.searchbook(connection);
-            } else if (menu === '4') {
+            } else if (menu ==='4'){
+                await search_mycheckouts.search_mycheckout(connection,login_success);
+            } else if (menu === '5') {
                 console.log('프로그램을 종료합니다');
                 connection.end();
                 process.exit();
