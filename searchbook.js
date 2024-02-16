@@ -5,7 +5,7 @@ async function searchbook(connection) {
   // book_title을 입력받음
   let book_title = await Input.getUserInput();
   // 입력된 값이 해당 sql문에 있는지 확인
-  let sql = `select book_title, book_author, publisher, DATE_FORMAT(publishing_year, '%Y-%m-%d') from book where book_title like ? or book_author like ? `;
+  let sql = `select book_title 책_제목, book_author 저자, publisher 출판사, DATE_FORMAT(publishing_year, '%Y-%m-%d') 출간일 from book where book_title like ? or book_author like ? `;
   let search_value = '%' + book_title + '%';
   connection.query(sql, [search_value, search_value], (pwd_err, book_result, fields) => {
 
