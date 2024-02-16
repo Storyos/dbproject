@@ -4,6 +4,7 @@ const Input = require('./userInput');
 const manageusers = require('./manageuser.js');
 const delete_books = require('./delete_book.js');
 const userInfo = require('./userInfo.js');
+const add_books = require('./add_book.js');
 let mysql = require('mysql');
 
 let connection = mysql.createConnection({
@@ -87,7 +88,41 @@ async function main() {
 
                 console.log('');
             } else if (menu === '2') {
-                console.log('도서반납 칸');
+              // 인설트 한 값 연체여부? 바꿔주고 book table 도서상태 바꿔주기
+              // 책에 있는 체크아웃 번호만 바꾸면 된다고 한다
+              // 책을 고르고 그 책에 있는 체크아웃을 바꾼다.
+              // id를 받아서 반납????????
+              
+              // 도서 목록을 모두 보여준다 책이름을 치면 반납으로 처리한다
+              // sql로 유저 도서목록을 가져온다
+              // 목록을 보여주고 선택 또는 종료 목록 
+              let return_select = await Input.getUserInput();
+              console.log(`||1. 도서 선택 2. 종료||`);
+              while(1)
+              {
+                if(return_select === '1')
+                {
+                  let info = `SELECT UID, UNUM, UNAME, UPNO, CHECKOUT, UPWD FROM USER`;
+                  // 숫자로 받기
+                  // let return_book_list = [];
+                  // let select_num = await Input.getUserInput();
+                  // 이름으로 받기
+                  // 사용자의 아이디 안에 책 정보가 있을거 아니냐
+                  let return_book_name = await Input.getUserInput();
+                  let return_book = 0;
+                  // 유저의 아이디에 있는 책 목록을 가져올게요
+                  let sql = `return_book_name ?`;
+                  let sql_book_name = await query(sql, [return_book_name]);
+                  // for문으로 구현 후 그 안에서 도서 선택 시 반납을 진행
+                  for(let i = 0; i < sql_book_name.length; i++)
+                  {
+                    let 
+                  }
+                } 
+                else if (return_select === '2') break;
+                else console.log("잘못된 번호 입니다. 다시 입력하세요.");
+              }
+
 
             } else if (menu === '3') {
                 await search.searchbook(connection);
@@ -116,10 +151,10 @@ async function main() {
                     console.log("\n 1. 도서 추가 , 2. 도서 삭제 3.종료");
                     let book_menu = await Input.getUserInput();
                     if (book_menu === '1') {
-
+                        await add_books.add_book(connection,query);
                         console.log('도서가 추가되었습니다.');
                     } else if (book_menu === '2') {
-                      
+
                         await delete_books.delete_book(connection,query);
                         console.log('도서를 삭제하였습니다.');
                     } else if (book_menu === '3') {
