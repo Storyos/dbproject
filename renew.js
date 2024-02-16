@@ -17,9 +17,7 @@ async function renewBook() {
       // 대출 정보 조회 SQL 쿼리
     const checkQuery = `
         SELECT checkout_id
-        FROM checkout
-        JOIN ;
-    `;
+        FROM checkout where checkout_id = ?    `;
 
       // SQL 쿼리 실행 대출 정보 조회
     connection.query(checkQuery, [checkoutId], (err, results) => {
@@ -30,24 +28,8 @@ async function renewBook() {
         }
 
       //  반납되지 않은 상태 일때(사용자가 대출 중 일때)
-    else if (book_delay === 1) {
-        console.log('대출 연장이 가능합니다');
-        connection.end();
-        return;
-    }
-
-    const bookTitle = results[0].book_title;
-    const bookAuthor = results[0].book_author;
-    const bookStatus = results[0].book_state;
-
-
-        // 다른 사용자의 예약이 없을 때
-        // if (bookStatus !== ' ') {
-        // console.log('.');
-        // connection.end();
-        // return;
-        // }
-
+    else if (book_delay === 1) { 
+        
         // 도서 대출 연장 SQL 쿼리
         const renewQuery = `
         UPDATE checkout
@@ -65,6 +47,11 @@ async function renewBook() {
         
         connection.end();
         });
+        console.log('대출 연장이 가능합니다');
+        connection.end();
+        return;
+    }
+
     });
     } catch (error) {
     console.error('입력 처리 중 오류가 발생했습니다:', error);
