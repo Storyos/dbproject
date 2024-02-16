@@ -11,7 +11,7 @@ async function search_mycheckout(connection, login_success){
     console.log("1. 돌아가기 2. 연장 신청 3. 종료")
     let search_menu = await Input.getUserInput();
     if(search_menu==='2'){
-        await renews.renewBook();
+        await renews.renewBook(connection);
     }
     else if(search_menu==='3'){
         connection.end();
