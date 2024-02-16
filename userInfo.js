@@ -1,7 +1,5 @@
 let mysql = require('mysql');
 
-console.log("사용자 정보를 조회하시겠습니까?");
-
 async function userInfo(connection) {
   console.log("사용자 정보를 조회하시겠습니까?");
   
