@@ -99,10 +99,9 @@ async function main() {
         console.clear();
         console.log('----------관리자 메뉴-------------');
         while (true) {
-            console.log(`1. 사용자 조회  2.도서 관리 3. 대출 허가/거부 변경 4. 종료`);
+            console.log(`1. 사용자 ID  2.도서 관리 3. 대출 허가/거부 변경 4. 종료`);
             let admin_menu = await Input.getUserInput();
-            if (admin_menu === '1') {
-                console.log('사용자 조회')                
+            if (admin_menu === '1') {           
                 await userInfo.userInfo(connection);
             } else if (admin_menu === '2') {
                 console.log('도서 관리');
