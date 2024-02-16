@@ -17,7 +17,8 @@ async function searchbook(connection) {
     if (book_result.length > 0) {
       console.log(`순번 | 책 제목   |   책 저자   |   출판사    |   출판연도`);
       for (let i = 0; i < book_result.length; i++) {
-        console.log(`${i + 1} | ${book_result[i].book_title}   |   ${book_result[i].book_author}   |   ${book_result[i].publisher}   |   ${book_result[i].publishing_year}`);
+        console.log(`${i + 1} | ${book_result[i].book_title}   |   ${book_result[i].book_author}   |   ${book_result[i].publisher}   |   ${String(book_result[i].publishing_year).slice(0,15)}
+        `);
         // 5개씩 나눠 보기
         if((i+1)%5===0) console.log();
       }

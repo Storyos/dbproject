@@ -84,9 +84,11 @@ async function main() {
                 console.log('대출 신청칸');
                 // 설정 필요
                 let title = await Input.getUserInput();
+
                 console.log('');
             } else if (menu === '2') {
                 console.log('도서반납 칸');
+
             } else if (menu === '3') {
                 await search.searchbook(connection);
             } else if (menu === '4') {
@@ -103,18 +105,21 @@ async function main() {
         console.clear();
         console.log('----------관리자 메뉴-------------');
         while (true) {
-            console.log(`1. 사용자 ID  2.도서 관리 3. 대출 허가/거부 변경 4. 종료`);
+            console.log(`1. 사용자 조회  2.도서 관리 3. 대출 허가/거부 변경 4. 종료`);
             let admin_menu = await Input.getUserInput();
             if (admin_menu === '1') {           
                 await userInfo.userInfo(connection);
             } else if (admin_menu === '2') {
                 console.log('도서 관리');
+
                 while (true) {
                     console.log("\n 1. 도서 추가 , 2. 도서 삭제 3.종료");
                     let book_menu = await Input.getUserInput();
                     if (book_menu === '1') {
+
                         console.log('도서가 추가되었습니다.');
                     } else if (book_menu === '2') {
+                      
                         await delete_books.delete_book(connection,query);
                         console.log('도서를 삭제하였습니다.');
                     } else if (book_menu === '3') {
