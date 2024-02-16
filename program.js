@@ -5,6 +5,7 @@ const manageusers = require('./manageuser.js');
 const delete_books = require('./delete_book.js');
 const userInfo = require('./userInfo.js');
 const add_books = require('./add_book.js');
+const add_checkouts = require('./add_checkout.js');
 let mysql = require('mysql');
 
 let connection = mysql.createConnection({
@@ -83,10 +84,7 @@ async function main() {
             let menu = await Input.getUserInput();
             if (menu === '1') {
                 console.log('대출 신청칸');
-                // 설정 필요
-                let title = await Input.getUserInput();
-
-                console.log('');
+                await add_checkouts.add_checkout(connection,query);
             } else if (menu === '2') {
               // 인설트 한 값 연체여부? 바꿔주고 book table 도서상태 바꿔주기
               // 책에 있는 체크아웃 번호만 바꾸면 된다고 한다
@@ -102,10 +100,11 @@ async function main() {
               {
                 if(return_select === '1')
                 {
-                  let info = `SELECT UID, UNUM, UNAME, UPNO, CHECKOUT, UPWD FROM USER`;
+                  let user_info = `SELECT UID, UNUM, UNAME, UPNO, CHECKOUT, UPWD FROM USER`;
                   // 숫자로 받기
                   // let return_book_list = [];
                   // let select_num = await Input.getUserInput();
+
                   // 이름으로 받기
                   // 사용자의 아이디 안에 책 정보가 있을거 아니냐
                   let return_book_name = await Input.getUserInput();
@@ -116,7 +115,9 @@ async function main() {
                   // for문으로 구현 후 그 안에서 도서 선택 시 반납을 진행
                   for(let i = 0; i < sql_book_name.length; i++)
                   {
-                    let 
+                    let sql = `
+                    update book set book_state = 1 
+                    where uid = ( select book_uid from checkout where checkout_uid =2 );` 
                   }
                 } 
                 else if (return_select === '2') break;

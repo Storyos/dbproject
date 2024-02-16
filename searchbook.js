@@ -11,23 +11,9 @@ async function searchbook(connection) {
 
     if (pwd_err) return console.error(pwd_err.message);
 
-
-
     // 입력이 정확하면 book_result에 값이 들어간다
     if (book_result.length > 0) {
-      console.table(book_result); 
-      // console.log(`순번 | 책 제목   |   책 저자   |   출판사    |   출판연도`);
-      // for (let i = 0; i < book_result.length; i++) {
-      //   console.table([{ 
-      //     'Index': i + 1, 
-      //     'Title': book_result[i].book_title, 
-      //     'Author': book_result[i].book_author, 
-      //     'Publisher': book_result[i].publisher, 
-      //     'Publishing Year': String(book_result[i].publishing_year).slice(0,15) 
-      // }]);
-      //   // 5개씩 나눠 보기
-      //   if((i+1)%5===0) console.log();
-      // }
+      console.table(book_result);
     } else {
       console.log(`일치하는 도서를 찾을 수 없습니다.`);
     }
