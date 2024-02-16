@@ -58,3 +58,4 @@ async function renewBook() {
     }
 }
 
+module.exports= {renewBook};
