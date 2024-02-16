@@ -4,6 +4,7 @@ const Input = require('./userInput');
 const manageusers = require('./manageuser.js');
 const delete_books = require('./delete_book.js');
 const userInfo = require('./userInfo.js');
+const add_books = require('./add_book.js');
 let mysql = require('mysql');
 
 let connection = mysql.createConnection({
@@ -114,6 +115,7 @@ async function main() {
                     console.log("\n 1. 도서 추가 , 2. 도서 삭제 3.종료");
                     let book_menu = await Input.getUserInput();
                     if (book_menu === '1') {
+                        await add_books.add_book(connection,query);
                         console.log('도서가 추가되었습니다.');
                     } else if (book_menu === '2') {
                         await delete_books.delete_book(connection,query);
